@@ -32,9 +32,9 @@ prompt = PromptTemplate(
 
 text_to_save = prompt.format(resume=resume)
 
-#text_to_save = llm(prompt.format(resume=resume))
+#text_to_save = text_to_save + llm(prompt.format(resume=resume))
 
 print(text_to_save)
 
-text_writer = TextFileWriter("output.txt", append=True, newline=True)
+text_writer = TextFileWriter("Paralaile/output.txt", append=True, newline=True)
 text_writer(text_to_save)
