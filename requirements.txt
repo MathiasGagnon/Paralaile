@@ -4,3 +4,4 @@ python-dotenv
 langchain_community
 langchain-openai
 pinecone-client
+nltk
