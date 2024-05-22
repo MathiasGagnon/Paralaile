@@ -43,7 +43,7 @@ def execute_pipeline(text):
     preprocessed_text = preprocessing.preprocess_resume(text)
     print("After")
     print("----------------")
-    print(text)
+    print(preprocessed_text)
 
 
 def get_first_row(path):
