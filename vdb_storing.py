@@ -2,6 +2,8 @@ from pinecone import Pinecone, ServerlessSpec
 from dotenv import load_dotenv
 import os
 
+#TODO: Save real information
+
 class vdb_storing():
     def __init__():
         # Load environment variables from .env file

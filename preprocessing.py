@@ -29,4 +29,6 @@ class preprocessing():
         # Join tokens back to string
         preprocessed_text = ' '.join(tokens)
 
+        #TODO: Handle special information like date/time, currency, etc. evaluate the requirements for these formats
+
         return preprocessed_text
