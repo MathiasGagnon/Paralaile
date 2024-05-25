@@ -1,10 +1,12 @@
-from dotenv import load_dotenv
 import os
+
+from dotenv import load_dotenv
 from langchain_openai import OpenAI
-from tools.data_loader import CSVLoader
 from langchain_core.prompts import PromptTemplate
-from tools.text_filewriter import TextFileWriter
-from tools.preprocessing import preprocessing
+
+from tools.data.Extract.csv_extractor import CsvExtractor
+from tools.data.Load.text_filewriter import TextFileWriter
+from tools.data.Transform.preprocessing import preprocessing
 from common.constants import *
 
 def simple_gpt_prompt(resume):
@@ -48,9 +50,8 @@ def execute_pipeline(text):
 
 def get_first_row(path):
     # Example usage:
-    loader = CSVLoader(path)
-    rows = loader.load_rows(1, randomize=True)  # Load 5 random rows from 'example.csv'
-
+    loader = CsvExtractor(path)
+    rows = loader.load_csv_data(num_rows=1, randomize=True)
     return rows[0][1]
 
 
