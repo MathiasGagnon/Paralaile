@@ -2,33 +2,38 @@ import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-# Download required NLTK data
+from nltk.stem import WordNetLemmatizer
+
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
 
-
-class preprocessing():
+class Preprocessing:
     def preprocess_resume(text):
-        # Convert to lowercase
+        """
+        Preprocess resumes from the resume dataset before tokenization.
+
+        Args:
+        - text: Text to preprocess.
+
+        Returns:
+        - The preprocessed text.
+        """
+
         text = text.lower()
-
-        # Remove special characters and punctuation
         text = re.sub(r'[^\w\s]', ' ', text)
-
-        # Normalize spaces
         text = re.sub(r'\s+', ' ', text).strip()
-
-            # Tokenize text
+        
         tokens = word_tokenize(text)
-
-        # Remove stop words
+        
         stop_words = set(stopwords.words('english'))
         tokens = [word for word in tokens if word not in stop_words]
-
-        # Join tokens back to string
+        
+        lemmatizer = WordNetLemmatizer()
+        tokens = [lemmatizer.lemmatize(word) for word in tokens]
+        
         preprocessed_text = ' '.join(tokens)
-
-        #TODO: Handle special information like date/time, currency, etc. evaluate the requirements for these formats
-
+        
+        # TODO: Handle special information like date/time, currency, etc. Evaluate the requirements for these formats
+        
         return preprocessed_text

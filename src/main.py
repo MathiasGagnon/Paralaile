@@ -6,7 +6,7 @@ from langchain_core.prompts import PromptTemplate
 
 from tools.data.Extract.csv_extractor import CsvExtractor
 from tools.data.Load.text_filewriter import TextFileWriter
-from tools.data.Transform.preprocessing import preprocessing
+from tools.data.Transform.preprocessing import Preprocessing
 from common.constants import *
 
 def simple_gpt_prompt(resume):
@@ -42,7 +42,7 @@ def execute_pipeline(text):
     print("Before")
     print(text)
     print("----------------")
-    preprocessed_text = preprocessing.preprocess_resume(text)
+    preprocessed_text = Preprocessing.preprocess_resume(text)
     print("After")
     print("----------------")
     print(preprocessed_text)
