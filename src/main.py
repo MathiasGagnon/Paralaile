@@ -1,11 +1,11 @@
 from dotenv import load_dotenv
 import os
 from langchain_openai import OpenAI
-from data_loader import CSVLoader
+from tools.data_loader import CSVLoader
 from langchain_core.prompts import PromptTemplate
-from text_filewriter import TextFileWriter
-from preprocessing import preprocessing
-from constants import *
+from tools.text_filewriter import TextFileWriter
+from tools.preprocessing import preprocessing
+from common.constants import *
 
 def simple_gpt_prompt(resume):
     # Load environment variables from .env file
