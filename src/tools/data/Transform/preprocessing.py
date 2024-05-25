@@ -9,7 +9,7 @@ nltk.download('stopwords')
 nltk.download('wordnet')
 
 class Preprocessing:
-    def preprocess_resume(text):
+    def preprocess_resume(self, text):
         """
         Preprocess resumes from the resume dataset before tokenization.
 

@@ -7,6 +7,11 @@ from langchain_core.prompts import PromptTemplate
 from tools.data.Extract.csv_extractor import CsvExtractor
 from tools.data.Load.text_filewriter import TextFileWriter
 from tools.data.Transform.preprocessing import Preprocessing
+from tools.data.Transform.tokenization import Tokenizer
+from tools.data.Transform.embedding import Embedder
+
+from pipeline import Pipeline
+
 from common.constants import *
 
 def simple_gpt_prompt(resume):
@@ -38,7 +43,7 @@ def simple_gpt_prompt(resume):
     text_writer = TextFileWriter(OUTPUTTXT_PATH, append=True, newline=True)
     text_writer(text_to_save)
 
-def execute_pipeline(text):
+def execute_v0_pipeline(text):
     print("Before")
     print(text)
     print("----------------")
@@ -54,8 +59,25 @@ def get_first_row(path):
     rows = loader.load_csv_data(num_rows=1, randomize=True)
     return rows[0][1]
 
+def use_resume_pipeline():
+
+    preprocessing = Preprocessing()
+    embedder = Embedder('text-embedding-ada-002')
+
+    pipeline = Pipeline(preprocessing, embedder)
+
+    # Sample resume text
+    resume_text = get_first_row(DATASET_PATH)
+
+    # Process the resume text through the pipeline
+    embeddings = pipeline.analyse(resume_text, analysis='Resume')
+
+    # Print embeddings (for demonstration purposes)
+    print("Embeddings:", embeddings)
+
 
 if __name__ == '__main__':
-    resume = get_first_row(DATASET_PATH)
-    execute_pipeline(resume)
+    #resume = get_first_row(DATASET_PATH)
+    #execute_v0_pipeline(resume)
     #simple_gpt_prompt(resume)
+    use_resume_pipeline()
