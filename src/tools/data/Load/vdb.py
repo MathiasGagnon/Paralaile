@@ -7,8 +7,8 @@ import os
 #TODO: UNTESTEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 #=======================================================
 
-class vdb_storing():
-    def __init__():
+class Vdb():
+    def __init__(self):
         # Load environment variables from .env file
         load_dotenv()
         # Access the API key
@@ -16,7 +16,7 @@ class vdb_storing():
         self.pc = Pinecone(api_key=self.api_key)
         self.index_name = "parallaile-index"
 
-    def first_setup():
+    def first_setup(self):
         pc = self.pc
         index_name = self.index_name
         if index_name not in pc.list_indexes().names():
@@ -30,8 +30,16 @@ class vdb_storing():
                 ) 
             )
 
-    def write_vector(id, values, namespace):
-        index = pc.Index(self.index_name)
+    def write_resume_vector(self, values):
+        namespace = "resume"
+
+        #TODO: Make a smart id creator
+        #latest_id = max(self.pc.Index(self.index_name).list(namespace=namespace))
+
+        self.write_vector("0", values, namespace)
+
+    def write_vector(self, id, values, namespace):
+        index = self.pc.Index(self.index_name)
 
         index.upsert(
             vectors=[

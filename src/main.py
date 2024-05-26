@@ -9,6 +9,7 @@ from tools.data.Load.text_filewriter import TextFileWriter
 from tools.data.Transform.preprocessing import Preprocessing
 from tools.data.Transform.tokenization import Tokenizer
 from tools.data.Transform.embedding import Embedder
+from tools.data.Load.vdb import Vdb
 
 from pipeline import Pipeline
 
@@ -63,8 +64,9 @@ def use_resume_pipeline():
 
     preprocessing = Preprocessing()
     embedder = Embedder('text-embedding-ada-002')
+    vdb = Vdb()
 
-    pipeline = Pipeline(preprocessing, embedder)
+    pipeline = Pipeline(preprocessing, embedder, vdb)
 
     # Sample resume text
     resume_text = get_first_row(DATASET_PATH)

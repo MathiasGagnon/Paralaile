@@ -1,9 +1,10 @@
 class Pipeline:
 
-    def __init__(self, preprocessing, embedder):
+    def __init__(self, preprocessing, embedder, vdb):
 
         self.preprocessing = preprocessing
         self.embedder = embedder
+        self.vdb = vdb
 
     def execute_resume_analysis(self, resume):
 
@@ -19,6 +20,7 @@ class Pipeline:
 
         if analysis is 'Resume':
             embeddings = self.execute_resume_analysis(data)
+            self.vdb.write_resume_vector(embeddings)
 
         return embeddings
 
